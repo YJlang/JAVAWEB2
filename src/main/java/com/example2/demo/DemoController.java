@@ -29,7 +29,7 @@ public class DemoController {
         // 이는 ViewResolver에 의해 처리되어 "hello.html" 템플릿을 찾아 렌더링합니다.
         return "hello";
     }
-
+//==========================2주차 추가문제=======================================>
     @GetMapping("/hello2")
     public String hello2(Model model2) {
         model2.addAttribute("data2", "홍길동님.");
@@ -39,5 +39,12 @@ public class DemoController {
         model2.addAttribute("data6", "매우 좋습니다.");
         return "hello2";
     }
+//================================================================================>
+
+    @GetMapping("/about_detailed")
+    public String about() {
+        return "about_detailed";
+    }
+    
     
 }
