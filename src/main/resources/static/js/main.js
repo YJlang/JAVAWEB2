@@ -121,6 +121,16 @@
         loop: true,
     });
 
+   function confirmClose() {
+    return confirm("정말로 페이지를 떠나시겠습니까?");
+   }
+
+   $("a.confirm-link").on('click', function(event) { 
+    if(!confirmClose()){
+        event.preventDefault();
+    }
+   });
+
     
 })(jQuery);
 

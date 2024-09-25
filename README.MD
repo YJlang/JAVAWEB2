@@ -10,5 +10,8 @@ This project is a starting point for a Web application.
 
 ## 수업 진행 상황
 
-### 2주차 수업 :  자바 환경 및 스프링 부트 설치 및 테스트 완료!
+### 2주차 수업 : 자바 환경 및 스프링 부트 설치 및 테스트 완료!
 - 문제 포함 : hello2.html 작성 및  컨트롤러에 매핑 추가 완료!
+
+### 3주차 수업 : 개인 포트폴리오 템플릿 수정 및 상세페이지 제작 후 매핑 완료!
+- 문제 포함 : about_detailed.html 상세페이지 수정 후 confirm 알림창 구현 완료!
