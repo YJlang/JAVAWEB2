@@ -15,3 +15,6 @@ This project is a starting point for a Web application.
 
 ### 3주차 수업 : 개인 포트폴리오 템플릿 수정 및 상세페이지 제작 후 매핑 완료!
 - 문제 포함 : about_detailed.html 상세페이지 수정 후 confirm 알림창 구현 완료!
+
+### 4주차 수업 : 개인 포트폴리오 템플릿 수정 및 MySQL 데이터베이스 연동 완료!
+- 문제포함 : ID(기본키), NAME 사용자 추가 입력 및 출력 확인 완료!!
