@@ -34,15 +34,15 @@ public class DemoController {
     //     return "hello";
     // }
 //==========================2주차 추가문제=======================================>
-    // @GetMapping("/hello2")
-    // public String hello2(Model model2) {
-    //     model2.addAttribute("data2", "홍길동님.");
-    //     model2.addAttribute("data3", "방갑습니다.");
-    //     model2.addAttribute("data4", "오늘.");
-    //     model2.addAttribute("data5", "날씨는.");
-    //     model2.addAttribute("data6", "매우 좋습니다.");
-    //     return "hello2";
-    // }
+    @GetMapping("/hello2")
+    public String hello2(Model model2) {
+        model2.addAttribute("data2", "홍길동님.");
+        model2.addAttribute("data3", "방갑습니다.");
+        model2.addAttribute("data4", "오늘.");
+        model2.addAttribute("data5", "날씨는.");
+        model2.addAttribute("data6", "매우 좋습니다.");
+        return "hello2";
+    }
 //================================================================================>
 
     @GetMapping("/about_detailed")
@@ -77,5 +77,6 @@ public class DemoController {
         System.out.println("데이터 출력 디버그 : " + test);
         return "testdb";
     }
+    
     
 }

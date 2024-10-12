@@ -12,9 +12,13 @@ This project is a starting point for a Web application.
 
 ### 2주차 수업 : 자바 환경 및 스프링 부트 설치 및 테스트 완료!
 - 문제 포함 : hello2.html 작성 및  컨트롤러에 매핑 추가 완료!
+![2주차_문제이미지](image-3.png)
 
 ### 3주차 수업 : 개인 포트폴리오 템플릿 수정 및 상세페이지 제작 후 매핑 완료!
 - 문제 포함 : about_detailed.html 상세페이지 수정 후 confirm 알림창 구현 완료!
+![3주차_문제이미지](image-1.png)
+![3주차_문제이미지2](image-2.png)
 
-### 4주차 수업 : 개인 포트폴리오 템플릿 수정 및 MySQL 데이터베이스 연동 완료!
+### 4주차 수업 : MVC 디자인 패턴 구조 학습 및 MySQL 데이터베이스 연동 완료!
 - 문제포함 : ID(기본키), NAME 사용자 추가 입력 및 출력 확인 완료!!
+- ![4주차_문제이미지](image.png)
