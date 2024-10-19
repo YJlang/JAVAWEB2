@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 // HTTP GET 요청을 특정 메서드에 매핑하기 위한 애노테이션을 임포트합니다.
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+//import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example2.demo.model.domain.TestDB;
 import com.example2.demo.model.service.TestService;

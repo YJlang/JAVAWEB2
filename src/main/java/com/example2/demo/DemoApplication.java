@@ -1,3 +1,4 @@
+//-- Active: 1729365158064@@127.0.0.1@3306@spring
 package com.example2.demo; //현재 폴더 위치
 
 import org.springframework.boot.SpringApplication; //스프링 핵심 클래스 
