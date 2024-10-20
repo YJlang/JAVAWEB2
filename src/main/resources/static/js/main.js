@@ -121,14 +121,19 @@
         loop: true,
     });
 
+   // 페이지를 떠날 때 확인 메시지를 표시하는 함수
    function confirmClose() {
     return confirm("정말로 페이지를 떠나시겠습니까?");
    }
 
+   // 'confirm-link' 클래스를 가진 모든 링크에 대해 클릭 이벤트 리스너 추가
    $("a.confirm-link").on('click', function(event) { 
+    // confirmClose() 함수가 false를 반환하면 (사용자가 '취소'를 선택하면)
     if(!confirmClose()){
+        // 기본 링크 동작을 방지하여 페이지 이동을 막음
         event.preventDefault();
     }
+    // confirmClose()가 true를 반환하면 (사용자가 '확인'을 선택하면) 링크 동작이 정상적으로 수행됨
    });
 
     
