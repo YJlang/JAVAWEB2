@@ -1,29 +1,32 @@
 package com.example2.demo.model.domain;
-import lombok.*; // 어노테이션 자동 생성
-import jakarta.persistence.*; // 기존 javax 후속 버전
 
-@Getter // setter는 없음(무분별한 변경 x)
-@Entity // 아래 객체와 DB 테이블을 매핑. JPA가 관리
-@Table(name = "article") // 테이블 이름을 지정. 없는 경우 클래스이름으로 설정
-@NoArgsConstructor(access = AccessLevel.PROTECTED) // 외부 생성자 접근 방지
+import lombok.*; // Lombok이라는 도구를 사용해요. 이 도구는 반복되는 코드를 줄여주는 마법 같은 역할을 해요.
+import jakarta.persistence.*; // 데이터베이스와 우리 프로그램을 연결해주는 특별한 도구를 가져와요.
+
+@Getter // 이 클래스의 모든 변수에 대해 자동으로 값을 가져오는 메소드를 만들어줘요.
+@Entity // 이 클래스가 데이터베이스의 테이블과 연결된다는 걸 알려주는 표시에요.
+@Table(name = "article") // 데이터베이스에서 이 클래스와 연결될 테이블 이름이 "article"이라고 알려주는 거예요.
+@NoArgsConstructor(access = AccessLevel.PROTECTED) // 아무것도 넣지 않고 이 클래스의 객체를 만들 수 있게 해주지만, 외부에서는 함부로 만들지 못하게 해요.
 
 public class Article {
-    @Id // 기본 키
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // 기본 키 1씩 증가
-    @Column(name = "id", updatable = false) // 수정 x
+    @Id // 이 변수가 데이터베이스에서 각 항목을 구분하는 중요한 번호라는 걸 표시해요.
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // 이 번호를 자동으로 1씩 증가시켜 만들어달라고 데이터베이스에 부탁하는 거예요.
+    @Column(name = "id", updatable = false) // 데이터베이스에서 이 변수의 이름이 'id'이고, 한 번 정해지면 바꿀 수 없다고 알려주는 거예요.
     private Long id;
-    @Column(name = "title", nullable = false) // null x
-    private String title = "";
-    @Column(name = "content", nullable = false)
-    private String content = "";
-    @Builder //생성자에 빌더 패턴 적용(불변성)
 
+    @Column(name = "title", nullable = false) // 제목을 저장하는 곳이에요. 반드시 값이 있어야 해요.
+    private String title = "";
+
+    @Column(name = "content", nullable = false) // 내용을 저장하는 곳이에요. 이것도 반드시 값이 있어야 해요.
+    private String content = "";
+
+    @Builder // 이 클래스의 객체를 만들 때 편리하게 만들 수 있게 도와주는 특별한 방법을 제공해요.
     public Article(String title, String content){
         this.title = title;
         this.content = content;
     }
     
-    public void update(String title, String content) { // 현재 객체 상태 업데이트
+    public void update(String title, String content) { // 제목과 내용을 새로운 값으로 바꿀 수 있게 해주는 메소드에요.
         this.title = title;
         this.content = content;
     }

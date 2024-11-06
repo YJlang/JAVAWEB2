@@ -3,13 +3,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>블로그 게시판</title>
+    <title>블로그 게시판(NEW)</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container">
-        <h1 class="mt-5">블로그 게시판</h1>
+        <h1 class="mt-5">블로그 게시판(NEW)</h1>
         <!--게시글 추가 폼-->
         <div class="mt-4">
             <h2>게시글 추가</h2>
@@ -36,29 +36,28 @@
                         <th>ID</th>
                         <th>제목</th>
                         <th>내용</th>
+                        <th>작성자</th>
+                        <th>작성일</th>
+                        <th>조회수</th>
+                        <th>좋아요</th>
                     </tr>
                 </thead>
                 <tbody>
                     <!-- th:each - 반복문, articles 컬렉션의 각 요소를 article 변수에 할당하며 반복 -->
-                    <tr th:each="article : ${articles}">
-                        <!-- th:text - 태그 내부 텍스트를 동적으로 설정
-                             ${article.id} - 변수 표현식, article 객체의 id 속성값을 출력 -->
-                        <td th:text="${article.id}"></td>
-                        <td th:text="${article.title}"></td>
-                        <td th:text="${article.content}"></td>
+                    <tr th:each="board : ${boards}">
+                        <td th:text="${board.id}"></td>
+                        <td>GUEST</td>
                         <td>
-                            <!-- th:href - 링크 URL을 동적으로 생성
-                                 @{...} - URL 표현식
-                                 (id=${article.id}) - URL 파라미터 설정 -->
-                            <a class="btn btn-warning" th:href="@{/article_edit/{id}(id=${article.id})}">수정</a>
-                            <!-- DELETE 요청을 위한 폼
-                                 _method hidden input - HTTP 메소드 오버라이드 -->
-                            <form th:action="@{/api/article_delete/{id}(id=${article.id})}" method="post" style="display: inline;">
-                                <input type="hidden" name="_method" value="DELETE">
-                                <button type="submit" class="btn btn-danger">삭제</button>
-                            </form>
-                         </td>
+                            <a th:href="@{/board_view/{id}(id=${board.id})}">
+                                <span th:text="${board.title}"></span>
+                            </a>
+                        </td>
+                        <td th:text="${board.user}"></td>
+                        <td th:text="${board.newdate}"></td>
+                        <td th:text="${board.count}"></td>
+                        <td th:text="${board.likecount}"></td>
                     </tr>
+                    
                 </tbody>
             </table>
         </div>

@@ -2,19 +2,89 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>게시판 오류</title>
+    <title>귀여운 오류 페이지</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #ffe6f2;
+            font-family: 'Comic Sans MS', cursive;
+        }
+        .error-container {
+            margin-top: 10%;
+            padding: 30px;
+            background-color: #fff0f5;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(255,105,180,0.3);
+            animation: pulse 2s infinite;
+        }
+        .error-icon {
+            font-size: 5rem;
+            color: #ff69b4;
+            animation: heartbeat 1.5s infinite;
+        }
+        .btn-custom {
+            background-color: #ff69b4;
+            border-color: #ff69b4;
+            transition: all 0.3s;
+        }
+        .btn-custom:hover {
+            background-color: #ff1493;
+            border-color: #ff1493;
+            transform: scale(1.1);
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ffff00;
+            animation: sparkle 1.5s infinite;
+        }
+        @keyframes sparkle {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <div class="row justify-content-center mt-5">
-            <div class="col-md-6 text-center">
-                <h1 class="display-4">오류가 발생했습니다</h1>
-                <p class="lead">요청하신 게시글을 찾을 수 없습니다.</p>
-                <a href="/article_list" class="btn btn-primary mt-3">게시판 목록으로 돌아가기</a>
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center error-container">
+                <i class="fas fa-heart-broken error-icon mb-4"></i>
+                <h1 class="display-4 mb-4">앗! 미안해요 ㅠㅠ</h1>
+                <p class="lead mb-4">찾으시는 게시글이 숨바꼭질하고 있어요!</p>
+                <a href="/article_list" class="btn btn-lg btn-custom">다시 찾으러 가볼까요?</a>
             </div>
         </div>
     </div>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script>
+        function createSparkles() {
+            const container = document.querySelector('.error-container');
+            for (let i = 0; i < 20; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(sparkle);
+            }
+        }
+        window.onload = createSparkles;
+    </script>
 </body>
 </html>

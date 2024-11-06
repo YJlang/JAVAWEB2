@@ -8,12 +8,49 @@
     <h1>안녕하세요!</h1>
     <p th:text="${data}"></p>
     <a href="/">홈페이지메인</a>
+    <!-- th:utext는 HTML 태그를 해석하여 렌더링합니다. 예: <h2>가 실제 제목 태그로 표시됨 -->
+    <!-- message는 Thymeleaf가 서버에서 데이터를 받아오지 못했을 때 보여줄 기본값(fallback)입니다 -->
     <span th:utext="${data1}">message</span>
+    
+    <!-- th:text는 HTML 태그를 문자 그대로 표시합니다. 예: <h2>가 텍스트로 그대로 표시됨 -->
+    <!-- message는 Thymeleaf가 서버에서 데이터를 받아오지 못했을 때 보여줄 기본값(fallback)입니다 -->
     <span th:text="${data1}">message</span>
 
+    <!-- th:value는 입력 필드의 초기값을 설정합니다. ${data2}는 컨트롤러에서 전달된 값을 사용합니다 -->
     <input type="text" th:value="${data2}">
+    
+    <!-- 체크박스 입력 필드입니다 -->
+    <!-- th:field는 폼 바인딩을 위한 것으로 *{data2}는 현재 선택된 객체의 data2 속성을 참조합니다 -->
+    <!-- th:value="true"는 체크박스가 선택되었을 때의 값을 true로 설정합니다 -->
     <input type="checkbox" th:field="*{data2}" th:value="true"> 동의합니다.
 
-    <p><a th:href="@{/posts/(id=${link})}">글 상세보기</a></p>
+    <!-- 이 부분은 Thymeleaf를 사용하여 동적으로 링크를 생성하는 코드입니다. -->
+    <p><a th:href="@{/article_edit/{id}(id=${link})}">글 상세보기</a></p>
+    <!-- 
+    1. th:href="@{...}"는 Thymeleaf의 URL 표현식입니다.
+    2. @{/posts/}는 기본 URL 경로를 나타냅니다.
+    3. (id=${link})는 URL 파라미터를 추가합니다. 여기서 'link'는 컨트롤러에서 모델에 추가된 변수입니다.
+    4. 결과적으로, 이 링크는 "/posts?id=값" 형태의 URL을 생성합니다. 여기서 '값'은 'link' 변수의 실제 값입니다.
+    5. 사용자가 이 링크를 클릭하면 해당 ID의 게시물 상세 페이지로 이동하게 됩니다.
+    -->
+    <!-- th:if는 조건문입니다. link 값이 01일 때만 이 div가 표시됩니다 -->
+    <div th:if="${link == 01}">
+        <p>link가 01입니다.</p>
+    </div>
+
+    <!-- th:unless는 th:if의 반대입니다. link 값이 01이 아닐 때만 이 div가 표시됩니다 -->
+    <div th:unless="${link == 01}">
+        <p>link가 01이 아닙니다.</p>
+    </div>
+
+    <!-- th:with는 변수를 선언하는 문법입니다. 여기서는 name 값을 first라는 변수에 할당합니다 -->
+    <!-- 할당된 first 변수는 이 div 안에서만 사용할 수 있습니다 -->
+    <div th:with="first=${name}">
+        <div th:unless="${first == '윤준하'}">
+            <p>윤준하가 아닙니다.</p>
+            <p>리스트에서 처음 사람의 이름 = <span th:text="${first}"></span></p>
+        </div>
+    </div>
+    
 </body>
 </html>
