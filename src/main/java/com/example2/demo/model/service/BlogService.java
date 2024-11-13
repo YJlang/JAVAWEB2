@@ -8,7 +8,9 @@ import com.example2.demo.model.domain.Board;
 import com.example2.demo.model.repository.BlogRepository;
 import com.example2.demo.model.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 @Service
 @RequiredArgsConstructor // 생성자 자동 생성(부분)
@@ -28,6 +30,18 @@ public class BlogService {
 
     public Optional<Board> findByIdBoard(Long id) { // ID로 게시글 조회
         return boardRepository.findById(id); // 주어진 ID로 게시글을 찾아 반환
+    }
+
+    public Board saveBoard(AddBoardRequest request) { // 새로운 게시글 저장
+        return boardRepository.save(request.toEntity()); // 요청을 엔티티로 변환하여 저장
+    }
+
+    public Page<Board> findAllBoard(Pageable pageable) { // 게시글 페이지 조회
+        return boardRepository.findAll(pageable); // 페이지 조회
+    }
+
+    public Page<Board> searchByKeyword(String keyword, Pageable pageable) { // 게시글 키워드 조회
+        return boardRepository.findByTitleContainingIgnoreCase(keyword, pageable); // 키워드 조회
     }
 
     

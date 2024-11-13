@@ -23,6 +23,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -42,9 +46,27 @@ public class BlogController {
     }
 
     @GetMapping("/board_list")
-    public String board_list(Model model) {
-        List<Board> list = blogService.findAllBoard();
+    public String board_list(Model model, @RequestParam(defaultValue = "0") int page, 
+                                          @RequestParam(defaultValue = "") String keyword) {
+        int pageSize = 3;
+        Pageable pageable = PageRequest.of(page, pageSize);
+        Page<Board> list;
+
+        if (keyword.isEmpty()) {
+            list = blogService.findAllBoard(pageable);
+        } 
+        else {
+            list = blogService.searchByKeyword(keyword, pageable);
+        }
+
+        // 현재 페이지의 시작 번호 계산
+        int startNum = (page * pageSize) + 1;
+        
         model.addAttribute("boards", list);
+        model.addAttribute("totalPages", list.getTotalPages());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("startNum", startNum); // 시작 번호를 뷰로 전달
         return "board_list";
     }
 
@@ -83,13 +105,23 @@ public class BlogController {
         }
         return "board_view"; // .HTML 연결
     }
-    
 
+    @GetMapping("/board_write")
+    public String board_write() {
+        return "board_write";
+    }
+    
     // 새 게시글 추가
     @PostMapping("/api/articles")
     public String addArticle(@ModelAttribute AddArticleRequest request) {
         blogService.save(request);
         return "redirect:/article_list"; // 게시글 추가 후 목록 페이지로 리다이렉트
+    }
+
+    @PostMapping("/api/boards")
+    public String addBoard(@ModelAttribute AddBoardRequest request) {
+        blogService.saveBoard(request);
+        return "redirect:/board_list";
     }
 
     // @PostMapping("/api/boards")
