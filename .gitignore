@@ -35,11 +35,3 @@ build/
 
 // ... existing content ...
 
-### Image Files ###
-*.png
-*.jpg
-*.jpeg
-*.gif
-*.ico
-*.svg
-*.webp
