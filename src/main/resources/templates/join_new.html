@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .error-message {
+            color: red;
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">회원 가입 화면</h1>
+        <!-- 회원가입 폼 -->
+        <div class="mt-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h3 class="card-title text-center mb-4">회원정보 입력</h3>
+                    <form th:action="@{/api/members}" method="post" id="joinForm">
+                        <!-- 이름 -->
+                        <div class="form-group mb-3">
+                            <label for="name">이름</label>
+                            <input type="text" class="form-control" id="name" name="name" 
+                                   placeholder="이름을 입력하세요" required minlength="2">
+                            <div class="error-message" id="nameError">이름은 2자 이상이어야 합니다.</div>
+                        </div>
+
+                        <!-- 이메일 -->
+                        <div class="form-group mb-3">
+                            <label for="email">이메일</label>
+                            <input type="email" class="form-control" id="email" name="email" 
+                                   placeholder="example@email.com" required>
+                            <div class="error-message" id="emailError">올바른 이메일 형식이 아닙니다.</div>
+                        </div>
+
+                        <!-- 비밀번호 -->
+                        <div class="form-group mb-3">
+                            <label for="password">비밀번호</label>
+                            <input type="password" class="form-control" id="password" name="password" 
+                                   placeholder="비밀번호를 입력하세요" required minlength="8">
+                            <div class="error-message" id="passwordError">
+                                비밀번호는 8자 이상이며, 대소문자, 특수문자를 포함해야 합니다.
+                            </div>
+                        </div>
+
+                        <!-- 비밀번호 확인 -->
+                        <div class="form-group mb-3">
+                            <label for="passwordConfirm">비밀번호 확인</label>
+                            <input type="password" class="form-control" id="passwordConfirm" 
+                                   name="passwordConfirm" placeholder="비밀번호를 다시 입력하세요" required>
+                            <div class="error-message" id="passwordConfirmError">
+                                비밀번호가 일치하지 않습니다.
+                            </div>
+                        </div>
+
+                        <!-- 전화번호 -->
+                        <div class="form-group mb-3">
+                            <label for="mobile">전화번호</label>
+                            <input type="tel" class="form-control" id="mobile" name="mobile" 
+                                   placeholder="01012345678" pattern="[0-9]{11}" required>
+                            <div class="error-message" id="mobileError">
+                                올바른 전화번호 형식이 아닙니다.
+                            </div>
+                        </div>
+
+                        <!-- 나이 -->   
+                        <div class="form-group mb-3">
+                            <label for="age">나이</label>
+                            <input type="number" class="form-control" id="age" name="age" 
+                                   placeholder="나이를 입력하세요" required min="1" max="150">
+                            <div class="error-message" id="ageError">
+                                올바른 나이를 입력해주세요 (1-150).
+                            </div>
+                        </div>
+
+                        <!-- 주소 -->
+                        <div class="form-group mb-3">
+                            <label for="address">주소</label>
+                            <input type="text" class="form-control" id="address" name="address" 
+                                   placeholder="주소를 입력하세요" required>
+                            <div class="error-message" id="addressError">
+                                주소를 입력해주세요.
+                            </div>
+                        </div>
+
+                        <!-- 버튼 그룹 -->
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary" id="submitBtn">가입하기</button>
+                            <a href="/" class="btn btn-secondary">취소</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    document.getElementById('joinForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // 폼 제출 일시 중지
+        
+        // 모든 에러 메시지 초기화
+        document.querySelectorAll('.error-message').forEach(elem => {
+            elem.style.display = 'none';
+        });
+
+        let isValid = true;
+
+        // 이름 검증
+        const name = document.getElementById('name');
+        const nameRegex = /^[가-힣x|X]{2,}$/;
+        if (!nameRegex.test(name.value)) {
+            document.getElementById('nameError').style.display = 'block';
+            isValid = false;    
+        }
+
+        // 이메일 검증
+        const email = document.getElementById('email');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email.value)) {
+            document.getElementById('emailError').style.display = 'block';
+            isValid = false;
+        }
+
+        // 비밀번호 검증
+        const password = document.getElementById('password');
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+        if (!passwordRegex.test(password.value)) {
+            document.getElementById('passwordError').style.display = 'block';
+            isValid = false;
+        }   
+        
+        if (password.value !== passwordConfirm.value) {
+            document.getElementById('passwordConfirmError').style.display = 'block';
+            isValid = false;
+        }
+
+        // 전화번호 검증 (mobile로 변경)
+        const mobile = document.getElementById('mobile');  // phone에서 mobile로 변경
+        const mobileRegex = /^[0-9]{11}$/;
+        if (!mobileRegex.test(mobile.value)) {
+            document.getElementById('mobileError').style.display = 'block';
+            isValid = false;
+        }
+
+        // 나이 검증
+        const age = document.getElementById('age');
+        if (age.value < 1 || age.value > 150) {
+            document.getElementById('ageError').style.display = 'block';
+            isValid = false;
+        }
+
+        // 주소 검증
+        const address = document.getElementById('address');
+        if (address.value.trim() === '') {
+            document.getElementById('addressError').style.display = 'block';
+            isValid = false;
+        }
+
+        // 모든 검증을 통과하면 폼 제출
+        if (isValid) {
+            console.log('폼 제출 시도'); // 디버깅용
+            this.submit();
+        }
+    });
+
+    // 실시간 비밀번호 확인 검증
+    document.getElementById('passwordConfirm').addEventListener('input', function() {
+        const password = document.getElementById('password').value;
+        const passwordConfirmError = document.getElementById('passwordConfirmError');
+        
+        if (this.value !== password) {
+            passwordConfirmError.style.display = 'block';
+        } else {
+            passwordConfirmError.style.display = 'none';
+        }
+    });
+</script>
+</body>
+</html>
