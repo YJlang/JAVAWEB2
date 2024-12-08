@@ -20,9 +20,7 @@ public class BlogService {
     @Autowired
     private final BoardRepository boardRepository; // 리포지토리 선언
 
-    public List<Article> findAll() { // 게시판 전체 목록 조회
-        return blogRepository.findAll(); // 모든 게시글을 조회하여 반환
-    }
+    // ============================================================= //
 
     public List<Board> findAllBoard() { // 게시판 전체 목록 조회
         return boardRepository.findAll(); // 모든 게시글을 조회하여 반환
@@ -44,6 +42,11 @@ public class BlogService {
         return boardRepository.findByTitleContainingIgnoreCase(keyword, pageable); // 키워드 조회
     }
 
+    // ============================================================= //
+
+    public List<Article> findAll() { // 게시판 전체 목록 조회
+        return blogRepository.findAll(); // 모든 게시글을 조회하여 반환
+    }
     
 
     public Article save(AddArticleRequest request){ // 새로운 게시글 저장

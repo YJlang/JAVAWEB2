@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.example2.demo.model.domain.Article;
 import com.example2.demo.model.domain.Board;
 import com.example2.demo.model.service.BlogService;
+
+import jakarta.servlet.http.HttpSession;
+
 import com.example2.demo.model.service.AddArticleRequest;
 import com.example2.demo.model.service.AddBoardRequest;
 //import org.springframework.web.bind.annotation.RequestParam;
@@ -44,14 +47,31 @@ public class BlogController {
         model.addAttribute("articles", list); // 모델에 추가
         return "article_list"; // .HTML 연결
     }
+    // 게시판 목록을 보여주는 페이지 매핑
+    @GetMapping("/board_list") 
+    public String board_list(Model model, @RequestParam(defaultValue = "0") int page, // 페이지 번호(기본값 0)
+                                          @RequestParam(defaultValue = "") String keyword, // 검색어(기본값 빈문자열)
+                                          HttpSession session) {
+        // 세션에서 사용자 정보 가져오기
+        String userId = (String) session.getAttribute("userId");
+        String email = (String) session.getAttribute("email");
 
-    @GetMapping("/board_list")
-    public String board_list(Model model, @RequestParam(defaultValue = "0") int page, 
-                                          @RequestParam(defaultValue = "") String keyword) {
+        // 로그인 안된 경우 로그인 페이지로 리다이렉트
+        if (userId == null) {
+            return "redirect:/login";
+        }
+
+        // 현재 로그인된 사용자 ID 출력 
+        System.out.println("세션 userId: " + userId);
+
+        // 한 페이지당 보여줄 게시글 수
         int pageSize = 3;
+        
+        // 페이징 처리를 위한 객체 생성
         Pageable pageable = PageRequest.of(page, pageSize);
         Page<Board> list;
 
+        // 검색어가 없으면 전체 목록, 있으면 검색 결과 가져오기
         if (keyword.isEmpty()) {
             list = blogService.findAllBoard(pageable);
         } 
@@ -61,14 +81,20 @@ public class BlogController {
 
         // 현재 페이지의 시작 번호 계산
         int startNum = (page * pageSize) + 1;
-        
-        model.addAttribute("boards", list);
-        model.addAttribute("totalPages", list.getTotalPages());
-        model.addAttribute("currentPage", page);
-        model.addAttribute("keyword", keyword);
-        model.addAttribute("startNum", startNum); // 시작 번호를 뷰로 전달
+
+        // 화면에 전달할 데이터들을 모델에 추가
+        model.addAttribute("startNum", startNum); // 시작 번호
+        model.addAttribute("email", email); // 사용자 이메일
+        model.addAttribute("boards", list); // 게시글 목록 
+        model.addAttribute("totalPages", list.getTotalPages()); // 전체 페이지 수
+        model.addAttribute("currentPage", page); // 현재 페이지
+        model.addAttribute("keyword", keyword); // 검색어
+        model.addAttribute("startNum", startNum); // 시작 번호
+
+        // board_list.html 페이지 반환
         return "board_list";
     }
+
 
     @GetMapping("/article_edit/{id}") // 게시판 링크 지정
     public String article_edit(Model model, @PathVariable Long id) {

@@ -11,11 +11,11 @@ import jakarta.validation.constraints.*;
 @NoArgsConstructor
 public class AddMemberRequest {
     @NotBlank(message = "이름은 필수 입력값입니다")
-    @Pattern(regexp = "^[가-힣x|X]{2,}$", message = "이름은 한글 2글자 이상이어야 합니다")
+    @Pattern(regexp = "^[가-힣X]{2,}$", message = "이름은 한글 2글자 이상이어야 합니다")
     private String name;
 
     @NotBlank(message = "이메일은 필수 입력값입니다")
-    @Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$", message = "이메일 형식이 올바르지 않습니다")
+    @Email(message = "이메일 형식이 올바르지 않습니다")
     private String email;
 
     @NotBlank(message = "비밀번호는 필수 입력값입니다")
@@ -27,14 +27,14 @@ public class AddMemberRequest {
     private String passwordConfirm;
 
     @NotBlank(message = "나이는 필수 입력값입니다")
-    @Pattern(regexp = "^(?:1[9]|[2-8][0-9]|90)$", message = "나이는 19세 이상 90세 이하여야 합니다")
+    @Pattern(regexp = "^(19|[2-8][0-9]|90)$", message = "나이는 19세 이상 90세 이하여야 합니다")
     private String age;
 
-    @NotBlank(message = "휴대폰 번호는 필수 입력값입니다")
-    @Pattern(regexp = "^01(?:0|1|[6-9])-(?:\\d{3}|\\d{4})-\\d{4}$", message = "휴대폰 번호 형식이 올바르지 않습니다")
+    // @NotBlank(message = "휴대폰 번호는 필수 입력값입니다")
+    // @Pattern(regexp = "^01(?:0|1|[6-9])-(?:\\d{3}|\\d{4})-\\d{4}$", message = "휴대폰 번호 형식이 올바르지 않습니다")
     private String mobile;
 
-    @NotBlank(message = "주소는 필수 입력값입니다")
+    // @NotBlank(message = "주소는 필수 입력값입니다")
     private String address;
 
     // 비밀번호 일치 여부 확인
