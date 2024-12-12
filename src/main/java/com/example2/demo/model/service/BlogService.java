@@ -80,4 +80,15 @@ public class BlogService {
     public void deleteBoard(Long id) { // 게시글 삭제
         boardRepository.deleteById(id); // 주어진 ID로 게시글을 삭제
     }
+
+    public boolean incrementViewCount(Long id, String ip) {
+        Optional<Board> board = boardRepository.findById(id);
+        return board.map(b -> {
+            boolean increased = b.addViewCount(ip);
+            if (increased) {
+                boardRepository.save(b);
+            }
+            return increased;
+        }).orElse(false);
+    }
 }

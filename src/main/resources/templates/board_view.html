@@ -33,7 +33,7 @@
                         <td th:text="${board.content}"></td>
                         <td>GUEST</td>
                         <td th:text="${board.newdate}"></td>
-                        <td th:text="${board.count}"></td>
+                        <td th:text="${board.viewCount}"></td>
                         <td th:text="${board.likecount}"></td>
                         <td>
                             <div class="btn-group" th:if="${session.email == board.user}">

@@ -31,6 +31,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 
 @Controller
 //@ResponseBody
@@ -120,16 +122,42 @@ public class BlogController {
         return "board_edit"; // .HTML 연결
     }
 
-    @GetMapping("/board_view/{id}") // 게시판 링크 지정
-    public String board_view(Model model, @PathVariable Long id) {
-        Optional<Board> list = blogService.findByIdBoard(id); // 선택한 게시판 글
+    @GetMapping("/board_view/{id}")
+    public String board_view(Model model, @PathVariable Long id, HttpServletRequest request) {
+        Optional<Board> list = blogService.findByIdBoard(id);
         if (list.isPresent()) {
-            model.addAttribute("boards", list.get()); // 존재할 경우 실제 Article 객체를 모델에 추가
+            // 클라이언트 IP 가져오기
+            String clientIp = getClientIp(request);
+            // 조회수 증가 시도
+            blogService.incrementViewCount(id, clientIp);
+            model.addAttribute("boards", list.get());
         } else {
-            // 처리할 로직 추가 (예: 오류 페이지로 리다이렉트, 예외 처리 등)
-            return "article_error"; // 오류 처리 페이지로 연결
+            return "article_error";
         }
-        return "board_view"; // .HTML 연결
+        return "board_view";
+    }
+
+    // IP 주소 추출 메서드
+    private String getClientIp(HttpServletRequest request) {
+        String ip = request.getHeader("X-Forwarded-For");
+        
+        if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("Proxy-Client-IP");
+        }
+        if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("HTTP_CLIENT_IP");
+        }
+        if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+        }
+        if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();
+        }
+        
+        return ip;
     }
 
     @GetMapping("/board_write")
@@ -203,7 +231,7 @@ public class BlogController {
     // 전역 예외 처리
     @ControllerAdvice
     public class GlobalExceptionHandler {
-        // ID가 잘못된 형식일 때 예외 처리
+        // ID가 ���못된 형식일 때 예외 처리
         @ExceptionHandler(MethodArgumentTypeMismatchException.class)
         public ModelAndView handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
             ModelAndView mv = new ModelAndView("/article_error");
@@ -223,7 +251,7 @@ public class BlogController {
         // Exception 예외는 모든 종류의 예외를 포괄적으로 처리합니다.
         // 특정 예외를 처리하지 못한 경우 이 핸들러가 작동하여 일반적인 오류 메시지를 반환합니다.
     }
-    // 이 예외 처리기는 모든 컨트롤러에서 발생하는 MethodArgumentTypeMismatchException 예외를 처리합니다.
+    // 이 예외 처리��는 모든 컨트롤러에서 발생하는 MethodArgumentTypeMismatchException 예외를 처리합니다.
     // article_edit에서만 작동하는 이유는 article_edit 메서드에서 @PathVariable Long id를 사용하기 때문입니다.
     // 만약 잘못된 형식의 ID가 전달되면 MethodArgumentTypeMismatchException 예외가 발생하고, 이 예외 처리기가 작동하게 됩니다.
     // 다른 메서드에서도 @PathVariable Long id를 사용하면 동일하게 작동합니다.
