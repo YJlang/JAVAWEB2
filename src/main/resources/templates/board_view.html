@@ -36,11 +36,14 @@
                         <td th:text="${board.count}"></td>
                         <td th:text="${board.likecount}"></td>
                         <td>
-                            <a class="btn btn-warning btn-sm" th:href="@{/board_edit/{id}(id=${board.id})}">수정</a>
-                            <form th:action="@{/api/board_delete/{id}(id=${board.id})}" method="post" style="display:inline;">
-                                <input type="hidden" name="_method" value="delete">
-                                <button type="submit" class="btn btn-danger btn-sm">삭제</button>
-                            </form>
+                            <div class="btn-group" th:if="${session.email == board.user}">
+                                <a th:href="@{/board_edit/{id}(id=${board.id})}" class="btn btn-primary">수정</a>
+                                <form th:action="@{/api/board_delete/{id}(id=${board.id})}" method="post" style="display:inline;">
+                                    <input type="hidden" name="_method" value="DELETE"/>
+                                    <button type="submit" class="btn btn-danger" 
+                                            onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 </tbody>

@@ -13,6 +13,9 @@
         <!-- 게시글 추가 폼 -->
         <div class="mt-4">
             <h2>게시글 추가</h2>
+            <!-- th:action="@{/api/boards}" - 폼이 제출되면 /api/boards URL로 POST 요청이 전송됩니다.
+                 이는 서버의 BoardController에서 @PostMapping("/api/boards")로 매핑된 메서드에서 처리됩니다.
+                 폼에서 입력된 title, content 등의 데이터가 서버로 전송되어 새로운 게시글이 생성됩니다. -->
             <form th:action="@{/api/boards}" method="post" name="content">
                 <div class="form-group">
                     <label for="title">제목:</label>
@@ -23,7 +26,8 @@
                     <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">글 저장하기</button>
-                <input type="hidden" id="user" name="user" value="GUEST">
+                <!-- hidden 필드들은 폼 제출 시 함께 서버로 전송되는 추가 데이터입니다 -->
+                <input type="hidden" id="user" name="user" th:value="${session.email}">
                 <input type="hidden" id="newdate" name="newdate" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
                 <input type="hidden" id="count" name="count" value="0">
                 <input type="hidden" id="likecount" name="likecount" value="0">

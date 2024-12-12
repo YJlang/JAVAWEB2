@@ -1,5 +1,6 @@
 package com.example2.demo.controller;
 
+// 필요한 라이브러리들을 임포트
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,81 +15,98 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@Controller
+@Controller // 스프링 MVC 컨트롤러임을 나타내는 어노테이션
 public class MemberController {
-    private final MemberService memberService;
+    private final MemberService memberService; // 회원 서비스 객체 선언
 
+    // 생성자를 통한 의존성 주입
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
     }
 
-    @GetMapping("/join_new") // 회원 가입 페이지 연결
+    // 회원가입 페이지로 이동하는 GET 요청 처리
+    @GetMapping("/join_new")
     public String join_new() {
-        return "join_new"; // .HTML 연결
+        return "join_new"; // join_new.html 페이지 반환
     }
 
-    @PostMapping("/api/members") // 회원 가입 저장
+    // 회원가입 데이터를 처리하는 POST 요청 처리
+    @PostMapping("/api/members")
     public String addmembers(@ModelAttribute AddMemberRequest request) {
-        memberService.saveMember(request);
-        return "join_end"; // .HTML 연결
+        memberService.saveMember(request); // 회원 정보 저장
+        return "join_end"; // 가입 완료 페이지로 이동
     }
 
-    @GetMapping("/join_end") // 회원 가입 완료 페이지 연결
+    // 회원가입 완료 페이지로 이동하는 GET 요청 처리
+    @GetMapping("/join_end")
     public String join_end() {
-        return "join_end"; // .HTML 연결
+        return "join_end";
     }
 
-    @GetMapping("/login") // 로그인 페이지 연결
+    // 로그인 페이지로 이동하는 GET 요청 처리
+    @GetMapping("/login")
     public String login() {
-        return "login"; // .HTML 연결
+        return "login";
     }
 
-   @GetMapping("/api/logout") // 로그아웃 버튼 동작
+    // 로그아웃 처리하는 GET 요청 처리
+    @GetMapping("/api/logout")
     public String member_logout(Model model, HttpServletRequest request2, HttpServletResponse response) {
         try {
-            HttpSession session = request2.getSession(false); // 기존 세션 가져오기(존재하지 않으면 null 반환)
-            session.invalidate(); // 기존 세션 무효화
-            Cookie cookie = new Cookie("JSESSIONID", null); // JSESSIONID is the default session cookie name
-            cookie.setPath("/"); // Set the path for the cookie
-            cookie.setMaxAge(0); // Set cookie expiration to 0 (removes the cookie)
-            response.addCookie(cookie); // Add cookie to the response
-            session = request2.getSession(true); // 새로운 세션 생성
-            System.out.println("세션 userId: " + session.getAttribute("userId" )); // 초기화 후 IDE 터미널에 세션 값 출력
-            return "login"; // 로그인 페이지로 리다이렉트
-        } catch (IllegalArgumentException e) {  
-            model.addAttribute("error", e.getMessage()); // 에러 메시지 전달
-            return "login"; // 로그인 실패 시 로그인 페이지로 리다이렉트
+            // 현재 사용자의 세션만 가져오기
+            HttpSession session = request2.getSession(false);
+            if (session != null) {
+                // 현재 세션의 email 값 확인
+                String email = (String) session.getAttribute("email");
+                
+                // 현재 세션만 무효화
+                session.invalidate();
+                
+                // 현재 사용자의 쿠키만 삭제
+                Cookie[] cookies = request2.getCookies();
+                if (cookies != null) {
+                    for (Cookie cookie : cookies) {
+                        if (cookie.getName().equals("JSESSIONID")) {
+                            cookie.setValue("");
+                            cookie.setPath("/");
+                            cookie.setMaxAge(0);
+                            response.addCookie(cookie);
+                        }
+                    }
+                }
+            }
+            return "login";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("error", e.getMessage());
+            return "login";
         }
     }
 
-    @PostMapping("/api/login_check") // 로그인(아이디, 패스워드) 체크
+    // 로그인 처리하는 POST 요청 처리
+    @PostMapping("/api/login_check")
     public String checkMembers(@ModelAttribute AddMemberRequest request, Model model,
                                 HttpServletRequest request2, HttpServletResponse response) {
         try {
-            HttpSession session = request2.getSession(false); // 기존 세션 가져오기(존재하지 않으면 null 반환)
-            if(session != null) {
-                session.invalidate(); // 기존 세션 무효화
-                Cookie cookie = new Cookie("JSESSIONID", null); // JSESSIONID is the default session cookie name
-                cookie.setPath("/"); // Set the path for the cookie
-                cookie.setMaxAge(0); // Set cookie expiration to 0 (removes the cookie)
-                response.addCookie(cookie); // Add cookie to the response
-            }
-            session = request2.getSession(true); // 새로운 세션 생성
-            Member member = memberService.loginCheck(request.getEmail(), request.getPassword()); // 패스워드 반환
-            String sessionId = UUID.randomUUID().toString(); // 임의로 고유아이디 생성
+            // 로그인 처리
+            Member member = memberService.loginCheck(request.getEmail(), request.getPassword());
+            
+            // 새로운 세션 생성 (기존 세션 유지)
+            HttpSession session = request2.getSession(true);
+            
+            // 사용자별 고유 세션 ID 생성
+            String sessionId = UUID.randomUUID().toString() + "_" + request.getEmail();
             String email = request.getEmail();
             
-            session.setAttribute("userId", sessionId); // 세션에 아이디 저장
-            session.setAttribute("email", email); // 세션에 이메일 저장
+            // 세션에 사용자 정보 저장
+            session.setAttribute("userId", sessionId);
+            session.setAttribute("email", email);
 
-            model.addAttribute("member", member); // 로그인 성공 시 회원 정보 전달
-            return "redirect:/board_list"; // 로그인 성공 후 이동할 페이지
+            model.addAttribute("member", member);
+            return "redirect:/board_list";
         } catch (IllegalArgumentException e) {
-            model.addAttribute("error", e.getMessage()); // 에러 메시지 전달
-            return "login"; // 로그인 실패 시 로그인 페이지로 리다이렉트
+            model.addAttribute("error", e.getMessage());
+            return "login";
         }
     }       
-
-
 
 }

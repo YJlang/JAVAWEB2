@@ -30,6 +30,7 @@ public class MemberService {
         return memberRepository.save(request.toEntity());
     }
 
+    // 로그인 시 비밀번호 검증
     public Member loginCheck(String email, String rawPassword) {
         Member member = memberRepository.findByEmail(email); // 이메일 조회
         if (member == null) {

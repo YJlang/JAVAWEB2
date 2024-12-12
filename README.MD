@@ -1,85 +1,108 @@
-# 🌱 JAVA 프로젝트 - 깃허브
+# 🌱 SPRING BOOT 웹 서비스 개발 프로젝트
 
-20211001 윤준하의 새로운 시작! SPRING BOOT 웹 서비스 개발의 세계로 떠나보아요~
+> 2023년 윤준하의 새로운 도전! Spring Boot를 활용한 웹 서비스 개발 여정을 기록합니다.
 
-## 🚀 시작하기
+## 📌 프로젝트 소개
 
-이 프로젝트는 웹 애플리케이션의 시작점입니다.
+본 프로젝트는 Spring Boot 기반의 웹 애플리케이션 개발 과정을 담고 있습니다.
 
-- [프로젝트 메인 주소](https://github.com/YJlang/JAVAWEB2)
+[![GitHub](https://img.shields.io/badge/GitHub-View_Repository-blue?style=for-the-badge&logo=github)](https://github.com/YJlang/JAVAWEB2)
 
-## 🛠 기술 스택
+## 🛠️ 기술 스택
 
-- ![Spring](https://img.shields.io/badge/-Spring-6DB33F?style=flat-square&logo=spring&logoColor=white) Spring Boot
-- ![MySQL](https://img.shields.io/badge/-MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white) MySQL
-- ![REST API](https://img.shields.io/badge/-REST%20API-FF6C37?style=flat-square&logo=postman&logoColor=white) REST API 🌐
-- ![Thymeleaf](https://img.shields.io/badge/-Thymeleaf-005F0F?style=flat-square&logo=thymeleaf&logoColor=white) Thymeleaf 템플릿 엔진
+<div align="center">
+  <img src="https://img.shields.io/badge/-Spring_Boot-6DB33F?style=for-the-badge&logo=spring&logoColor=white" alt="Spring Boot"/>
+  <img src="https://img.shields.io/badge/-MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL"/>
+  <img src="https://img.shields.io/badge/-REST_API-FF6C37?style=for-the-badge&logo=postman&logoColor=white" alt="REST API"/>
+  <img src="https://img.shields.io/badge/-Thymeleaf-005F0F?style=for-the-badge&logo=thymeleaf&logoColor=white" alt="Thymeleaf"/>
+</div>
 
-## 📚 수업 진행 상황
+## 📝 개발 진행 상황
 
----
+### Week 2 - 개발 환경 구축 ⚙️
+- Spring Boot 환경 설정 및 초기 테스트
+- hello2.html 페이지 구현 및 컨트롤러 매핑
+<details>
+<summary>📸 구현 결과</summary>
+<img src="image-3.png" alt="2주차 결과물"/>
+</details>
 
-### 2주차 수업 : 자바 환경 및 스프링 부트 설치 및 테스트 완료! 🎉
-- 문제 포함 : hello2.html 작성 및 컨트롤러에 매핑 추가 완료!
-![2주차_문제이미지](image-3.png)
+### Week 3 - 포트폴리오 페이지 개발 🎨
+- 개인 포트폴리오 템플릿 커스터마이징
+- 상세 페이지 제작 및 알림창 구현
+<details>
+<summary>📸 구현 결과</summary>
+<img src="image-1.png" alt="3주차 결과물 1"/>
+<img src="image-2.png" alt="3주차 결과물 2"/>
+</details>
 
----
+### Week 4 - 데이터베이스 연동 🗄️
+- MVC 패턴 학습 및 구현
+- MySQL 데이터베이스 연동 및 CRUD 구현
+<details>
+<summary>📸 구현 결과</summary>
+<img src="image.png" alt="4주차 결과물"/>
+</details>
 
-### 3주차 수업 : 개인 포트폴리오 템플릿 수정 및 상세페이지 제작 후 매핑 완료! 🖼
-- 문제 포함 : about_detailed.html 상세페이지 수정 후 confirm 알림창 구현 완료!
-![3주차_문제이미지](image-1.png)
-![3주차_문제이미지2](image-2.png)
+### Week 5-6 - 게시판 기능 구현 📊
+- 게시글 작성 및 조회 기능
+- 수정/삭제 기능 및 예외처리
+<details>
+<summary>📸 구현 결과</summary>
+<img src="image-5.png" alt="5주차 결과물"/>
+<img src="image-4.png" alt="6주차 결과물 1"/>
+<img src="image-6.png" alt="6주차 결과물 2"/>
+</details>
 
----
+### Week 7-8 - 게시판 고도화 🔄
+- 게시글 CRUD 완성
+- 페이징 처리 및 검색 기능 구현
+<details>
+<summary>📸 구현 결과</summary>
+<img src="image-7.png" alt="7주차 결과물 1"/>
+<img src="image-8.png" alt="7주차 결과물 2"/>
+<img src="image-9.png" alt="7주차 결과물 3"/>
+<img src="image-10.png" alt="8주차 결과물"/>
+</details>
 
-### 4주차 수업 : MVC 디자인 패턴 구조 학습 및 MySQL 데이터베이스 연동 완료! 🗃
-- 문제포함 : ID(기본키), NAME 사용자 추가 입력 및 출력 확인 완료!!
-![4주차_문제이미지](image.png)
+### Week 9-10 - 사용자 인증 시스템 🔐
+- 회원가입/로그인 기능 구현
+- 비밀번호 암호화 및 입력값 검증
+- 세션 관리 및 쿠키 설정
+<details>
+<summary>📸 구현 결과</summary>
+<img src="image-11.png" alt="9주차 결과물 1"/>
+<img src="image-12.png" alt="9주차 결과물 2"/>
+<img src="image-13.png" alt="9주차 결과물 3"/>
+<img src="image-14.png" alt="10주차 결과물 1"/>
+<img src="image-15.png" alt="10주차 결과물 2"/>
+</details>
 
----
+### Week 11 - 파일 업로드 & API 연동 🗂️
+- 다중 파일 업로드 시스템 구현
+- Google Maps API 연동
+- 동시 접속 사용자 관리 시스템 구현
+<details>
+<summary>📸 구현 결과</summary>
+<img src="image-19.png" alt="11주차 결과물 1"/>
+<img src="image-20.png" alt="11주차 결과물 2"/>
+<img src="image-21.png" alt="11주차 결과물 3"/>
+<img src="image-22.png" alt="11주차 결과물 4"/>
+</details>
 
-### 5주차 수업 : 블로그 게시판 페이지 제작 및 글쓰기, 조회 완료! 📝
-- 문제포함 : @Controller 방식으로 게시글 글쓰기시 페이지 리다이렉트 완료!
-![5주차_문제이미지](image-5.png)
+## ✨ 추가 구현 기능
 
----
+### 1. 조회수 시스템
+- 사용자별 조회수 증가 로직 구현
+- 중복 조회 방지 시스템
 
-### 6주차 수업 : 블로그 게시판 페이지 수정, 삭제 구현 완료! ✏️🗑
-- 문제포함 : 파라미터 문자열 예외처리 구현 완료!
-![6주차_문제이미지](image-4.png)
-![6주차_문제이미지2](image-6.png)
+### 2. 커스텀 에러 페이지
+- 사용자 친화적인 에러 페이지 디자인
+<details>
+<summary>📸 에러 페이지 미리보기</summary>
+<img src="image-18.png" alt="커스텀 에러 페이지"/>
+</details>
 
----
-
-### 중간고사 : 제발 잘 봤길!! 🤞
-
----
-
-### 7주차 수업 : 블로그 게시판 생성 및 조회 구현 완료! 🔍
-- 문제포함 : 게시글 수정 및 삭제 완료! -> putmapping 방식(html 히든 메소드 사용)
-![7주차_문제이미지](image-7.png)
-![7주차_문제이미지2](image-8.png)
-![7주차_문제이미지3](image-9.png)
-
----
-
-### 8주차 수업 : 블로그 게시판 페이징 처리 및 검색 구현 완료! 🔍
-- 문제포함 : ID가 아닌 글번호로 조회 완료!, 글 삭제 후 글 번호 재정렬 완료! -> 뷰(HTML)에서 처리하기(board_list.html)
-![8주차_문제이미지](image-10.png)
-
-### 9주차 수업 : 로그인 및 회원가입 구현 완료! 🔑
-- 문제포함 : 로그인 및 회원가입 완료! -> 회원가입 및 로그인시 비밀번호 암호화 완료!(Validator 사용)
-- DB 테이블 날짜를 DATE형식으로 바꿈
-
-### 10주차 수업 : JSESSIONID 쿠키 사용 및 쿠키 옵션 설정 완료! -> 세션유지🍪
-
-### 11주차 수업 : 파일 업로드 및 지도API 구현 완료! 📁
-
----
-
-### 앞으로 해야할 일
-- 회원가입, 로그인 기능 구현
-- 게시글 조회시 조회 count 증가 구현(2가지 방법이 있음. 하나는 로그인 검사해서 내가 아닌 다른 유저가 조회하면 조회수 증가, 다른 하나는 유저 상관없이 조회만 증가)
-- 게시글 등록시 실제 현재 날짜로 추가구현(완료!!)
-- 사용자가 게시글 좋아요 싫어요 할 수 있는 기능 구현
-- 게시글 추가시 작성자 정보 추가 구현(로그인에 따라 작성자 정보 추가 -> 현재는 임시로 GUEST로 추가된 상태임)
+### 3. 게시글 기능 강화
+- 실시간 날짜 표시 시스템
+- 좋아요/싫어요 기능 구현

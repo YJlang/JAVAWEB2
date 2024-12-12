@@ -145,10 +145,21 @@ public class BlogController {
     }
 
     @PostMapping("/api/boards")
-    public String addBoard(@ModelAttribute AddBoardRequest request) {
+    public String addBoard(@ModelAttribute AddBoardRequest request,
+                          HttpSession session) {
+        // 세션 체크
+        String email = (String) session.getAttribute("email");
+        if (email == null) {
+            return "redirect:/login";
+        }
+        
+        // 작성자를 현재 로그인한 사용자로 설정
+        request.setUser(email);
         blogService.saveBoard(request);
+        
         return "redirect:/board_list";
     }
+    
 
     // @PostMapping("/api/boards")
     // public String addBoard(@ModelAttribute AddBoardRequest request) {
@@ -195,7 +206,7 @@ public class BlogController {
         // ID가 잘못된 형식일 때 예외 처리
         @ExceptionHandler(MethodArgumentTypeMismatchException.class)
         public ModelAndView handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
-            ModelAndView mv = new ModelAndView("/article_string_error");
+            ModelAndView mv = new ModelAndView("/article_error");
             mv.addObject("errorMessage", "잘못된 요청입니다(문자열 오류). 올바른 ID를 입력해주세요.");
             return mv; // 에러 페이지로 이동
         }
@@ -205,7 +216,7 @@ public class BlogController {
         // 기타 예외 처리
         @ExceptionHandler(Exception.class)
         public ModelAndView handleException(Exception ex) {
-            ModelAndView mv = new ModelAndView("/article_string_error");
+            ModelAndView mv = new ModelAndView("/article_error");
             mv.addObject("errorMessage", "예기치 않은 오류가 발생했습니다. 다시 시도해주세요.");
             return mv; // 에러 페이지로 이동
         }
