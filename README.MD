@@ -1,108 +1,124 @@
-# 🌱 SPRING BOOT 웹 서비스 개발 프로젝트
+# 🌱 JAVA 웹 프로젝트 포트폴리오
 
-> 2023년 윤준하의 새로운 도전! Spring Boot를 활용한 웹 서비스 개발 여정을 기록합니다.
+안녕하세요! 20211001 윤준하의 Spring Boot 웹 개발 여정을 소개합니다.
+열정과 도전정신으로 가득한 이 프로젝트에 오신 것을 환영합니다! 🎉
 
-## 📌 프로젝트 소개
+## 🔗 프로젝트 링크
 
-본 프로젝트는 Spring Boot 기반의 웹 애플리케이션 개발 과정을 담고 있습니다.
+- [프로젝트 GitHub 저장소](https://github.com/YJlang/JAVAWEB2)
 
-[![GitHub](https://img.shields.io/badge/GitHub-View_Repository-blue?style=for-the-badge&logo=github)](https://github.com/YJlang/JAVAWEB2)
+## 🛠 기술 스택
 
-## 🛠️ 기술 스택
+### Backend
+- ![Spring](https://img.shields.io/badge/-Spring-6DB33F?style=flat-square&logo=spring&logoColor=white) Spring Boot 2.7.x
+- ![JPA](https://img.shields.io/badge/-JPA-59666C?style=flat-square&logo=hibernate&logoColor=white) Spring Data JPA
+- ![Security](https://img.shields.io/badge/-Spring%20Security-6DB33F?style=flat-square&logo=springsecurity&logoColor=white) Spring Security
+- ![MySQL](https://img.shields.io/badge/-MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white) MySQL 8.0
 
-<div align="center">
-  <img src="https://img.shields.io/badge/-Spring_Boot-6DB33F?style=for-the-badge&logo=spring&logoColor=white" alt="Spring Boot"/>
-  <img src="https://img.shields.io/badge/-MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL"/>
-  <img src="https://img.shields.io/badge/-REST_API-FF6C37?style=for-the-badge&logo=postman&logoColor=white" alt="REST API"/>
-  <img src="https://img.shields.io/badge/-Thymeleaf-005F0F?style=for-the-badge&logo=thymeleaf&logoColor=white" alt="Thymeleaf"/>
-</div>
+### Frontend
+- ![Thymeleaf](https://img.shields.io/badge/-Thymeleaf-005F0F?style=flat-square&logo=thymeleaf&logoColor=white) Thymeleaf
+- ![Bootstrap](https://img.shields.io/badge/-Bootstrap-7952B3?style=flat-square&logo=bootstrap&logoColor=white) Bootstrap 5
+- ![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black) JavaScript
 
-## 📝 개발 진행 상황
+### Tools & DevOps
+- ![Git](https://img.shields.io/badge/-Git-F05032?style=flat-square&logo=git&logoColor=white) Git
+- ![Maven](https://img.shields.io/badge/-Maven-C71A36?style=flat-square&logo=apachemaven&logoColor=white) Maven
 
-### Week 2 - 개발 환경 구축 ⚙️
-- Spring Boot 환경 설정 및 초기 테스트
-- hello2.html 페이지 구현 및 컨트롤러 매핑
+## 📚 개발 진행 상황
+
+### 2주차 - 개발 환경 구축 🔧
+- Spring Boot 프로젝트 초기 설정 완료
+- Hello World 페이지 구현 및 컨트롤러 매핑 완료
 <details>
-<summary>📸 구현 결과</summary>
-<img src="image-3.png" alt="2주차 결과물"/>
+<summary>구현 결과 보기</summary>
+<img src="image-3.png" alt="2주차_환경구축">
 </details>
 
-### Week 3 - 포트폴리오 페이지 개발 🎨
+### 3주차 - 포트폴리오 페이지 개발 🎨
 - 개인 포트폴리오 템플릿 커스터마이징
-- 상세 페이지 제작 및 알림창 구현
+- 상세 페이지 제작 및 JavaScript confirm 기능 구현
 <details>
-<summary>📸 구현 결과</summary>
-<img src="image-1.png" alt="3주차 결과물 1"/>
-<img src="image-2.png" alt="3주차 결과물 2"/>
+<summary>구현 결과 보기</summary>
+<img src="image-1.png" alt="3주차_포트폴리오">
+<img src="image-2.png" alt="3주차_상세페이지">
 </details>
 
-### Week 4 - 데이터베이스 연동 🗄️
-- MVC 패턴 학습 및 구현
-- MySQL 데이터베이스 연동 및 CRUD 구현
+### 4주차 - MVC 패턴 & DB 연동 🗃
+- MVC 아키텍처 패턴 구현
+- MySQL 데이터베이스 연동 및 CRUD 기능 구현
+- ✨ 추가 구현: ID 자동 증가 및 사용자 정보 관리 시스템
 <details>
-<summary>📸 구현 결과</summary>
-<img src="image.png" alt="4주차 결과물"/>
+<summary>구현 결과 보기</summary>
+<img src="image.png" alt="4주차_DB연동">
 </details>
 
-### Week 5-6 - 게시판 기능 구현 📊
-- 게시글 작성 및 조회 기능
-- 수정/삭제 기능 및 예외처리
+### 5-6주차 - 게시판 기능 구현 📝
+- 게시글 CRUD 기능 완성
+- ✨ 추가 구현: 예외 처리 및 파라미터 검증 로직
 <details>
-<summary>📸 구현 결과</summary>
-<img src="image-5.png" alt="5주차 결과물"/>
-<img src="image-4.png" alt="6주차 결과물 1"/>
-<img src="image-6.png" alt="6주차 결과물 2"/>
+<summary>구현 결과 보기</summary>
+<img src="image-5.png" alt="5주차_게시판">
+<img src="image-4.png" alt="6주차_예외처리">
+<img src="image-6.png" alt="6주차_검증">
 </details>
 
-### Week 7-8 - 게시판 고도화 🔄
-- 게시글 CRUD 완성
-- 페이징 처리 및 검색 기능 구현
+### 7-8주차 - 게시판 고도화 🔍
+- ✨ 추가 구현: PUT 매핑을 통한 RESTful API 구현
+- ✨ 추가 구현: 게시글 번호 자동 재정렬 시스템
 <details>
-<summary>📸 구현 결과</summary>
-<img src="image-7.png" alt="7주차 결과물 1"/>
-<img src="image-8.png" alt="7주차 결과물 2"/>
-<img src="image-9.png" alt="7주차 결과물 3"/>
-<img src="image-10.png" alt="8주차 결과물"/>
+<summary>구현 결과 보기</summary>
+<img src="image-7.png" alt="7주차_REST">
+<img src="image-10.png" alt="8주차_페이징">
 </details>
 
-### Week 9-10 - 사용자 인증 시스템 🔐
-- 회원가입/로그인 기능 구현
-- 비밀번호 암호화 및 입력값 검증
-- 세션 관리 및 쿠키 설정
+### 9주차 - 보안 시스템 구축 🔒
+- ✨ 추가 구현: BCrypt를 활용한 비밀번호 암호화
+- ✨ 추가 구현: 강력한 입력값 검증 및 정규식 필터링
 <details>
-<summary>📸 구현 결과</summary>
-<img src="image-11.png" alt="9주차 결과물 1"/>
-<img src="image-12.png" alt="9주차 결과물 2"/>
-<img src="image-13.png" alt="9주차 결과물 3"/>
-<img src="image-14.png" alt="10주차 결과물 1"/>
-<img src="image-15.png" alt="10주차 결과물 2"/>
+<summary>구현 결과 보기</summary>
+<img src="image-11.png" alt="9주차_보안">
+<img src="image-13.png" alt="9주차_회원가입">
 </details>
 
-### Week 11 - 파일 업로드 & API 연동 🗂️
-- 다중 파일 업로드 시스템 구현
-- Google Maps API 연동
-- 동시 접속 사용자 관리 시스템 구현
+### 10주차 - 세션 관리 시스템 🍪
+- ✨ 추가 구현: 세션 기반 사용자 인증
+- ✨ 추가 구현: 게시글 작성자 권한 관리
 <details>
-<summary>📸 구현 결과</summary>
-<img src="image-19.png" alt="11주차 결과물 1"/>
-<img src="image-20.png" alt="11주차 결과물 2"/>
-<img src="image-21.png" alt="11주차 결과물 3"/>
-<img src="image-22.png" alt="11주차 결과물 4"/>
+<summary>구현 결과 보기</summary>
+<img src="image-14.png" alt="10주차_세션">
+<img src="image-17.png" alt="10주차_권한">
 </details>
 
-## ✨ 추가 구현 기능
+### 11주차 - 파일 시스템 & API 통합 📁
+- ✨ 추가 구현: 다중 파일 업로드 시스템
+- ✨ 추가 구현: 동시 사용자 세션 관리
+- ✨ 추가 구현: Google Maps API 통합
+<details>
+<summary>구현 결과 보기</summary>
+<img src="image-19.png" alt="11주차_파일">
+<img src="image-22.png" alt="11주차_지도">
+</details>
 
-### 1. 조회수 시스템
-- 사용자별 조회수 증가 로직 구현
-- 중복 조회 방지 시스템
+## 🌟 개인 추가 구현 하이라이트
 
-### 2. 커스텀 에러 페이지
+### 1. 조회수 시스템 📈
+- 사용자 기반 조회수 증가 로직
+- IP 기반 중복 조회 방지 시스템
+
+### 2. 커스텀 에러 페이지 🎨
 - 사용자 친화적인 에러 페이지 디자인
+- 직관적인 에러 메시지 전달 시스템
 <details>
-<summary>📸 에러 페이지 미리보기</summary>
-<img src="image-18.png" alt="커스텀 에러 페이지"/>
+<summary>구현 결과 보기</summary>
+<img src="image-18.png" alt="커스텀에러페이지">
 </details>
 
-### 3. 게시글 기능 강화
-- 실시간 날짜 표시 시스템
+### 3. 실시간 데이터 처리 ⚡
+- 실시간 날짜 기록 시스템
 - 좋아요/싫어요 기능 구현
+
+## 🎯 향후 개발 계획
+- 실시간 알림 시스템 구현
+- 댓글 시스템 고도화
+- 사용자 프로필 관리 기능 확장
+- 검색 기능 최적화
