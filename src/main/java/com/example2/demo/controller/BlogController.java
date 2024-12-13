@@ -2,6 +2,7 @@ package com.example2.demo.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.ArrayList;
 
 //import org.apache.el.stream.Optional;
 import org.springframework.stereotype.Controller;
@@ -231,7 +232,7 @@ public class BlogController {
     // 전역 예외 처리
     @ControllerAdvice
     public class GlobalExceptionHandler {
-        // ID가 ���못된 형식일 때 예외 처리
+        // ID가 못된 형식일 때 예외 처리
         @ExceptionHandler(MethodArgumentTypeMismatchException.class)
         public ModelAndView handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
             ModelAndView mv = new ModelAndView("/article_error");
@@ -255,5 +256,24 @@ public class BlogController {
     // article_edit에서만 작동하는 이유는 article_edit 메서드에서 @PathVariable Long id를 사용하기 때문입니다.
     // 만약 잘못된 형식의 ID가 전달되면 MethodArgumentTypeMismatchException 예외가 발생하고, 이 예외 처리기가 작동하게 됩니다.
     // 다른 메서드에서도 @PathVariable Long id를 사용하면 동일하게 작동합니다.
+
+    @GetMapping("/board_stats")
+    public String boardStats(Model model) {
+        List<Board> topBoards = blogService.findTop5ByOrderByViewCountDesc(); // 상위 5개 게시글
+        
+        // 그래프용 데이터 준비
+        List<String> titles = new ArrayList<>();
+        List<Integer> viewCounts = new ArrayList<>();
+        
+        for (Board board : topBoards) {
+            titles.add(board.getTitle());
+            viewCounts.add(board.getViewCount());
+        }
+        
+        model.addAttribute("titles", titles);
+        model.addAttribute("viewCounts", viewCounts);
+        
+        return "board_stats";
+    }
 
 }

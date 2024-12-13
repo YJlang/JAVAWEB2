@@ -130,12 +130,15 @@
 ### 1. 조회수 시스템 📈
 - 사용자 기반 조회수 증가 로직
 - IP 기반 중복 조회 방지 시스템
-> 💡 **성과**: 정확한 트래픽 분석과 사용자 행동 패턴 파악 가능
+- 조회수 통계 시스템(그래프 구현 -> Board_stats.html 새로구현)
+> 💡 **성과**: 정확한 트래픽 분석과 사용자 행동 패턴 파악 가능, 조회수 통계 시스템 구현 완료
 <details>
   <summary>조회수 시스템 이미지</summary>
   <img src="image-23.png" alt="조회수">
   <img src="image-24.png" alt="조회수">
   <img src="image-25.png" alt="조회수">
+  <img src="image-26.png" alt="조회수">
+  <img src="image-27.png" alt="조회수">
 </details>
 
 ### 2. 커스텀 에러 페이지(귀여운 버전) 🎨

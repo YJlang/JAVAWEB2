@@ -91,4 +91,8 @@ public class BlogService {
             return increased;
         }).orElse(false);
     }
+
+    public List<Board> findTop5ByOrderByViewCountDesc() {
+        return boardRepository.findTop5ByOrderByViewCountDesc();
+    }
 }

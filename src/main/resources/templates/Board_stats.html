@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 조회수 통계</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>게시글 조회수 통계</h1>
+        
+        <!-- 그래프를 표시할 캔버스 -->
+        <div style="width: 800px; height: 400px;">
+            <canvas id="viewsChart"></canvas>
+        </div>
+        
+        <script th:inline="javascript">
+            // Thymeleaf에서 전달받은 데이터
+            const titles = /*[[${titles}]]*/ [];
+            const viewCounts = /*[[${viewCounts}]]*/ [];
+            
+            // 차트 생성
+            new Chart(document.getElementById('viewsChart'), {
+                type: 'bar',
+                data: {
+                    labels: titles,
+                    datasets: [{
+                        label: '게시글별 조회수',
+                        data: viewCounts,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(54, 162, 235, 0.5)',
+                            'rgba(255, 206, 86, 0.5)',
+                            'rgba(75, 192, 192, 0.5)',
+                            'rgba(153, 102, 255, 0.5)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '인기 게시글 조회수 통계'
+                        },
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    }
+                }
+            });
+        </script>
+    </div>
+</body>
+</html>
